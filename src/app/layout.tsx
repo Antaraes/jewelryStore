@@ -32,14 +32,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen  font-sans antialiased dark",
           fontSans.variable,
           fontSerif.variable
         )}
       >
         <Navbar />
 
-        <main className="container">{children}</main>
+        <main className="">{children}</main>
         <Footer
           linkGroups={footerLinkGroups}
           copyrightText="© 2025, All Rights Reserved - MyJewel"

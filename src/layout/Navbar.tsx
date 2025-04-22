@@ -1,8 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Menu, X, ShoppingBag, Heart, User } from "lucide-react";
+import { Menu, X, ShoppingBag, Heart, User, Calendar, SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { DropdownMenu } from "@/components/ui/dropdown-menu";
+import { TbMenu2 } from "react-icons/tb";
+import { HiOutlineCalendarDays } from "react-icons/hi2";
 
 const navItems: NavItem[] = [
   {
@@ -63,10 +65,8 @@ const Navbar: React.FC = () => {
     const handleScroll = (): void => {
       const currentScrollY = window.scrollY;
 
-      // Main navbar stickiness
       setScrolled(currentScrollY > 10);
 
-      // Announcement bar visibility
       if (currentScrollY <= 0) {
         setShowAnnouncement(true);
       } else if (currentScrollY > lastScrollY) {
@@ -88,38 +88,56 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Sticky container for both announcement and navbar */}
       <div className="sticky top-0 z-50 w-full">
-        {/* Announcement bar with transition */}
         <div
-          className={`bg-white py-1 text-center text-sm overflow-hidden transition-all duration-300 ease-in-out `}
+          className={`bg-background flex mx-auto px-16 justify-between items-center py-1 text-center text-sm overflow-hidden transition-all duration-300 ease-in-out border-b border-border`}
         >
-          <p className="flex justify-center items-center">
+          <a
+            href="/book"
+            className="hidden text-sm lg:flex items-center gap-3 text-foreground hover:text-muted-foreground px-4 py-2"
+          >
+            <HiOutlineCalendarDays size={20} className="text-foreground" />
+            BOOK AN APPOINTMENT
+          </a>
+          <p className="flex justify-center text-xs items-center text-muted-foreground">
             <span className="mx-2">•</span>
             <span>Exclusive Collection Launch: Discover Timeless Elegance Today</span>
             <span className="mx-2">•</span>
           </p>
+          <div className="hidden lg:flex items-center space-x-4 ml-4">
+            <a href="/account" className="text-foreground hover:text-muted-foreground">
+              <User size={20} />
+            </a>
+            <a href="/wishlist" className="text-foreground hover:text-muted-foreground">
+              <Heart size={20} />
+            </a>
+            <a href="/cart" className="text-foreground hover:text-muted-foreground">
+              <ShoppingBag size={20} />
+            </a>
+          </div>
         </div>
 
-        {/* Desktop Navbar with smooth shadow transition */}
         <header
-          className={`hidden lg:block border-b bg-white transition-all duration-300 ease-in-out ${
-            scrolled ? "shadow-md " : ""
+          className={`hidden lg:block border-b border-border bg-background transition-all duration-300 ease-in-out ${
+            scrolled ? "shadow-md" : ""
           }`}
         >
-          <div className="container mx-auto px-4">
+          <div className="mx-auto px-18">
             <div className="flex justify-between items-center h-20">
+              <Link
+                href="/"
+                className="flex justify-center items-center text-4xl font-serif text-foreground border-r-2 border-border pr-20 h-full"
+              >
+                MyJewel
+              </Link>
               <div className="flex items-center">
-                <Link href="/" className="text-2xl font-serif mr-10">
-                  MyJewel
-                </Link>
                 <nav className="hidden lg:flex space-x-8">
-                  {navItems.map((item, index) => (
+                  {navItems.map((item: NavItem, index: number) => (
                     <div key={index} className="relative">
                       {item.children ? (
                         <DropdownMenu item={item} isMobile={false} />
                       ) : (
-                        <a href={item.url} className="hover:text-gray-600">
+                        <a href={item.url} className="text-foreground hover:text-muted-foreground">
                           {item.label}
                         </a>
                       )}
@@ -128,63 +146,61 @@ const Navbar: React.FC = () => {
                 </nav>
               </div>
 
-              <div className="flex items-center space-x-4">
-                <a href="/book" className="text-sm border border-black px-4 py-2">
-                  BOOK AN APPOINTMENT
-                </a>
-                <div className="flex items-center space-x-4 ml-4">
-                  <a href="/account">
-                    <User size={20} />
-                  </a>
-                  <a href="/wishlist">
-                    <Heart size={20} />
-                  </a>
-                  <a href="/cart">
-                    <ShoppingBag size={20} />
-                  </a>
-                </div>
-              </div>
+              <button className="flex justify-center items-center text-4xl font-serif text-foreground border-l-2 border-border pl-10 h-full hover:text-muted-foreground">
+                <SearchIcon />
+              </button>
             </div>
           </div>
         </header>
 
         {/* Mobile Navbar with smooth shadow transition */}
         <header
-          className={`lg:hidden border-b bg-white transition-all duration-300 ease-in-out ${
+          className={`lg:hidden border-b border-border bg-background transition-all duration-300 ease-in-out ${
             scrolled ? "shadow-md" : ""
           }`}
         >
           <div className="flex items-center justify-between p-4">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="focus:outline-none"
-            >
-              <Menu size={24} />
-            </button>
+            <div className="space-x-4">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="focus:outline-none text-foreground hover:text-muted-foreground"
+              >
+                <TbMenu2 size={24} />
+              </button>
+              <button className="focus:outline-none text-foreground hover:text-muted-foreground">
+                <HiOutlineCalendarDays size={24} />
+              </button>
+            </div>
 
-            <Link href="/" className="text-2xl font-serif">
+            <Link href="/" className="text-2xl font-serif text-foreground">
               MyJewel
             </Link>
 
             <div className="flex space-x-4">
-              <a href="/wishlist">
+              <a href="/wishlist" className="text-foreground hover:text-muted-foreground">
                 <Heart size={20} />
               </a>
-              <a href="/cart">
+              <a href="/cart" className="text-foreground hover:text-muted-foreground">
                 <ShoppingBag size={20} />
               </a>
+              <button className="cursor-pointer focus:outline-none text-foreground hover:text-muted-foreground">
+                <SearchIcon size={20} />
+              </button>
             </div>
           </div>
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+            <div className="fixed inset-0 bg-background z-50 overflow-y-auto">
               <div className="p-4">
                 <div className="flex justify-between items-center mb-8">
-                  <Link href="/" className="text-2xl font-serif">
+                  <Link href="/" className="text-2xl font-serif text-foreground">
                     MyJewel
                   </Link>
-                  <button onClick={() => setIsMobileMenuOpen(false)}>
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-foreground hover:text-muted-foreground"
+                  >
                     <X size={24} />
                   </button>
                 </div>
@@ -192,7 +208,7 @@ const Navbar: React.FC = () => {
                 <div className="flex mb-8">
                   <a
                     href="/book"
-                    className="text-sm border border-black px-4 py-2 w-full text-center"
+                    className="text-sm border border-border px-4 py-2 w-full text-center text-foreground hover:bg-muted hover:text-muted-foreground"
                   >
                     BOOK AN APPOINTMENT
                   </a>
@@ -204,7 +220,10 @@ const Navbar: React.FC = () => {
                       {item.children ? (
                         <DropdownMenu item={item} isMobile={true} />
                       ) : (
-                        <a href={item.url} className="block">
+                        <a
+                          href={item.url}
+                          className="block text-foreground hover:text-muted-foreground"
+                        >
                           {item.label}
                         </a>
                       )}
@@ -217,7 +236,6 @@ const Navbar: React.FC = () => {
         </header>
       </div>
 
-      {/* Spacer to ensure content starts below the sticky navbar */}
       <div
         className={`h-0 transition-all duration-300 ${
           scrolled && !showAnnouncement ? "lg:h-20" : ""

@@ -2,7 +2,7 @@
 
 @plugin 'tailwindcss-animate';
 
-@variant dark (&:is(.dark *));
+/* @variant dark (&:is(.dark *)); */
 
 @theme {
   /* Colors */
