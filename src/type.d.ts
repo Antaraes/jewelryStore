@@ -25,3 +25,9 @@ interface NewsletterFormProps {
 interface PaymentMethodsProps {
   title: string;
 }
+
+interface AnimationSectionProps {
+  children: React.ReactNode;
+  className?: string;
+  refProp?: React.RefObject<HTMLDivElement | null>;
+}

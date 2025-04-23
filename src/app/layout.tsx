@@ -10,6 +10,7 @@ import Navbar from "@/layout/Navbar";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/layout/Footer";
 import { footerLinkGroups, socialLinks } from "@/constants/footer";
+import Provider from "./provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,20 +32,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={cn(
-          "min-h-screen  font-sans antialiased dark",
-          fontSans.variable,
-          fontSerif.variable
-        )}
+        className={cn("min-h-screen  font-sans antialiased dark")}
+        data-new-gr-c-s-check-loaded="14.1232.0"
+        suppressHydrationWarning
       >
-        <Navbar />
+        <Provider>
+          <Navbar />
 
-        <main className="">{children}</main>
-        <Footer
-          linkGroups={footerLinkGroups}
-          copyrightText="© 2025, All Rights Reserved - MyJewel"
-          socialLinks={socialLinks}
-        />
+          <main className="">{children}</main>
+          <Footer
+            linkGroups={footerLinkGroups}
+            copyrightText="© 2025, All Rights Reserved - MyJewel"
+            socialLinks={socialLinks}
+          />
+        </Provider>
       </body>
     </html>
   );
