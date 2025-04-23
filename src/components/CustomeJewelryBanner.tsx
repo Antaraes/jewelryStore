@@ -1,4 +1,3 @@
-// components/CustomJewelryBanner.tsx
 import React, { useRef } from "react";
 import AnimationSection from "./AnimationSection";
 import Image from "next/image";

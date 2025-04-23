@@ -1,4 +1,3 @@
-// components/ExploreMoreSection.tsx
 import React, { useRef } from "react";
 import AnimationSection from "./AnimationSection";
 import EducationLink from "./EducationLinkSection";
