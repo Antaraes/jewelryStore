@@ -14,7 +14,6 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({}) => {
   const { addNotification } = useNotification();
 
   useEffect(() => {
-    // Count down if timer is active
     if (countdown > 0) {
       const timer = setTimeout(() => {
         setCountdown(countdown - 1);
@@ -32,7 +31,6 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({}) => {
     e.preventDefault();
     setError("");
 
-    // Do nothing if countdown is active
     if (countdown > 0) {
       return;
     }
@@ -49,7 +47,6 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({}) => {
 
     setIsSubmitting(true);
 
-    // Simulate API call
     setTimeout(() => {
       const submittedEmail = email;
       handleNewsletterSubmit(submittedEmail);
@@ -122,11 +119,9 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({}) => {
     </div>
   );
 };
-
-// Updated submission handler that uses the context
+//To be connected with email service in the future
 export const handleNewsletterSubmit = (email: string) => {
   console.log(
     `Sending newsletter subscription to ${process.env.EMAIL_ADDRESS} for email: ${email}`
   );
-  // The notification is now handled in the form component via context
 };
